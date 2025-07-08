@@ -25,6 +25,10 @@ jobs:
 
     - name: Run tests
       run: npm test
+
+    - name: Get runner public IP
+      run: curl ifconfig.me
+
     - name: Log in to DockerHub
       run: |
          if [ -z "${{ secrets.DOCKER_USERNAME }}" ] || [ -z "${{ secrets.DOCKER_PASSWORD }}" ]; then
