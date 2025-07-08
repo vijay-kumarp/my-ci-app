@@ -1,5 +1,3 @@
-Add a simple index.js:
-
 js
 Copy
 Edit
