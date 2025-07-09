@@ -8,9 +8,7 @@ on:
 
 jobs:
   build:
-
     runs-on: host
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
@@ -20,13 +18,18 @@ jobs:
       with:
         node-version: '18'
 
-   
+  test:
+    runs-on: host
+    needs: build
+    steps:
     - name: Run tests
       run: npm test
-
     - name: Get runner public IP
       run: curl ifconfig.me
-
+  deploy:
+    runs-on: host
+    needs: test
+    steps:
     - name: Log in to DockerHub
       run: |
          if [ -z "${{ secrets.DOCKER_USERNAME }}" ] || [ -z "${{ secrets.DOCKER_PASSWORD }}" ]; then
@@ -37,7 +40,9 @@ jobs:
 
     - name: Build Docker image
       run: sudo docker build -t ${{ secrets.DOCKER_USERNAME }}/my-ci-app:latest .
+  
 
     - name: Push Docker image
       run: sudo docker push ${{ secrets.DOCKER_USERNAME }}/my-ci-app:latest
+      
 
