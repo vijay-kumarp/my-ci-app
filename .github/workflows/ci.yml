@@ -20,9 +20,7 @@ jobs:
       with:
         node-version: '18'
 
-    - name: Install dependencies
-      run: sudo yum install npm -y
-
+   
     - name: Run tests
       run: npm test
 
