@@ -17,6 +17,8 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: '18'
+    - name: Install dependencies
+      run: sudo apt install npm -y
 
   test:
     runs-on: host
