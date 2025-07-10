@@ -51,8 +51,7 @@ jobs:
      steps:
 
       - name: Push Docker image
-        run: |  
-          sudo docker login -u vijay309kumar -p dckr_pat_THmAWCsM3x4PYBmWY0wM-tq3-8Y
+        run: 
           sudo docker push ${{ secrets.DOCKER_USERNAME }}/my-ci-app:v1
       - name: publish
         run: npm publish
