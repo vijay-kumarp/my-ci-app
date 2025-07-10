@@ -50,6 +50,9 @@ jobs:
      steps:
 
       - name: Push Docker image
-        run: sudo docker push image ${{ secrets.DOCKER_USERNAME }}/my-ci-app:latest
+        run: |
+          sudo docker image tag  ${{ secrets.DOCKER_USERNAME }}/my-ci-app:latest
+
+          sudo docker push image ${{ secrets.DOCKER_USERNAME }}/my-ci-app:latest
       
 
