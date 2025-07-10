@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: host
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
@@ -17,11 +17,10 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: '18'
-    - name: Install dependencies
-      run: sudo apt install npm -y
+   
 
   test:
-    runs-on: ubuntu-latest
+    runs-on: host
     needs: build
     steps:
     - name: Run tests
@@ -29,7 +28,7 @@ jobs:
     - name: Get runner public IP
       run: curl ifconfig.me
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: host
     needs: test
     steps:
     - name: Log in to DockerHub
@@ -40,14 +39,14 @@ jobs:
          fi
          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
   deliver:
-      runs-on: ubuntu-latest
+      runs-on: host
       needs: deploy
       steps:
       
       - name: Build Docker image
         run: sudo docker build -t ${{ secrets.DOCKER_USERNAME }}/my-ci-app:v1 .
   dispatch:
-     runs-on: ubuntu-latest
+     runs-on: host
      needs: deliver
      steps:
 
