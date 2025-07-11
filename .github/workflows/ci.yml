@@ -44,12 +44,12 @@ jobs:
       steps:
       
       - name: Build Docker image
-        run: sudo docker build -t ${{ secrets.DOCKER_USERNAME }}/my-ci-app:v1 .
+        run: sudo docker build -t ${{ secrets.DOCKER_USERNAME }}/my-ci-app:latest .
   dispatch:
      runs-on: host
      needs: deliver
      steps:
 
       - name: Push Docker image
-        run: sudo docker push ${{ secrets.DOCKER_USERNAME }}/my-ci-app:v1
+        run: sudo docker push ${{ secrets.DOCKER_USERNAME }}/my-ci-app:latest
 
