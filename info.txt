@@ -1,0 +1,7 @@
+--type this command before executing the pipeline on runner as normal user 
+# sudo usermod -aG docker $USER
+
+and make sure you have configure visudo file by logging as root user
+#sudo visudo 
+
+<new-user>  ALL=(ALL) NOPASSWD: ALL
